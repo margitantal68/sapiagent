@@ -35,7 +35,7 @@ SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
     2. Segment SapiMouse dataset into actions: **python create_sapimouse_actions.py**
     3. Create Bezier **baseline** and **humanlike** datasets using the endpoints from SapMouse S1 (1 min session):  **python create_bezier_actions.py**
     4. Create equidistant actions, that will be used for training the autoencoders (supervised): **python create_equidistant_actions.py** 
-    5. Train an autoencoder, then generate the corresponding actions. Use settings.py to set the desired architectire and training type.
+    5. Train an autoencoder, then generate the corresponding actions. Use settings.py to set the desired architecture and training type.
         1. Set training parameters **settings.py** 
             1. CNN_AE, conventional training: TRAINING_TYPE = 'unsupervised', KEY ='fcn' 
             2. RNN_AE, conventional training: TRAINING_TYPE = 'unsupervised', KEY ='bidirectional' 
