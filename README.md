@@ -1,4 +1,4 @@
-# apiagent
+# sapiagent
 SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
 
 # dataset
