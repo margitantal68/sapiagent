@@ -1,0 +1,12 @@
+# files
+_*.*
+# folders
+bezier_actions/
+equidistant_actions/
+generated_actions/
+output_png/
+output_roc_data/
+sapimouse/
+sapimouse_actions/
+TRAINED_MODELS/
+TRAINING_CURVES/
