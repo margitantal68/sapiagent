@@ -1,10 +1,10 @@
-#sapiagent
+# apiagent
 SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
 
-#dataset
+# dataset
 * [SapiMouse] - https://ms.sapientia.ro/~manyi/sapimouse/sapimouse.html
 
-#code
+# code
 * folders
     * bezier_actions - content will be generated
     * equidistant actions - content will be generated
