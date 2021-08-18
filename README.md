@@ -30,15 +30,19 @@ SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
     * settings.py - different configurations for running an experiment
     * utils.py - utility functions
 
-* Steps
-    1. Download and unzip the sapimouse dataset --> sapimouse folder
-    2. python create_sapimouse_actions.py
-    3. python create_bezier_actions.py
-    4. python create_equidistant_actions.py 
-    5. Train autoencoder, then generate actions; results: 4 files in generated_actions folder
-        1. settings.py: set TRAINING_TYPE {'supervised', 'unsupervised'} and set KEY {'fcn', 'bidirectional'}
-        2. python autoencoder_training.py
-        3. python generate_autoencoder_actions.py
-    6. Evaluate the quality of the generated actions: python anomaly_detection.py
+* steps
+    1. Download and unzip the SapiMouse dataset into **sapimouse** folder
+    2. Segment SapiMouse dataset into actions: **python create_sapimouse_actions.py**
+    3. Create Bezier **baseline** and **humanlike** datasets using the endpoints from SapMouse S1 (1 min session):  **python create_bezier_actions.py**
+    4. Create equidistant actions, that will be used for training the autoencoders (supervised): **python create_equidistant_actions.py** 
+    5. Train an autoencoder, then generate the corresponding actions. Use settings.py to set the desired architectire and training type.
+        1. Set training parameters **settings.py** 
+            1. CNN_AE, conventional training: TRAINING_TYPE = 'unsupervised', KEY ='fcn' 
+            2. RNN_AE, conventional training: TRAINING_TYPE = 'unsupervised', KEY ='bidirectional' 
+            3. CNN_AE, our approach: TRAINING_TYPE = 'supervised', KEY ='fcn' 
+            4. RNN_AE, our approach: TRAINING_TYPE = 'supervised', KEY ='bidirectional' 
+        2. Train the autoencoder: **python autoencoder_training.py**
+        3. Generate actions (trajectories): **python generate_autoencoder_actions.py**
+    6. Evaluate the quality of the generated actions: **python anomaly_detection.py**
 
 
