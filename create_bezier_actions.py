@@ -26,9 +26,6 @@ def generate_trajectories(output_filename, type):
             points = hc.generateCurve(offsetBoundaryX=10, offsetBoundaryY=50,\
                         leftBoundary=10, rightBoundary=1600, \
                         downBoundary=10, upBoundary=1200, \
-                        # knotsCount=0, \
-                        # distortionMean=5, distortionStdev=3, distortionFrequency=0.5, \
-                        # tween=pytweening.easeOutCubic, \
                         targetPoints= int(numpoints[i]))
         else:
             points = hc.generateCurve(offsetBoundaryX=10, offsetBoundaryY=50,\
