@@ -1,5 +1,6 @@
 # files
 _*.*
+*.pyc
 *.txt
 # folders
 bezier_actions/
