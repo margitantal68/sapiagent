@@ -2,6 +2,7 @@ import settings as stt
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+import numpy as np
 from sklearn import metrics
 
 
@@ -310,12 +311,41 @@ def plot_original_curves_dx_dy_dt(df_original):
 
 # Access - 2021. augusztus
 def plot_multiple_auc():
-    bezier_baseline = [0.93, 0.97, 0.98, 0.99, 0.99, 0.99, 0.99, 1.00, 1.00, 1.00]
-    bezier_humanlike = [0.90, 0.94, 0.96, 0.97, 0.97, 0.98, 0.98, 0.98, 0.98, 0.99]
-    unsup_ae_cnn = [0.80, 0.87, 0.90, 0.93, 0.94, 0.95, 0.96, 0.96, 0.97, 0.97,]
-    unsup_ae_rnn = [0.98, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
-    sup_ae_cnn = [0.59, 0.61, 0.63, 0.64, 0.66, 0.66, 0.67, 0.68, 0.69, 0.69]
-    sup_ae_rnn = [0.62, 0.66, 0.69, 0.71, 0.73, 0.75, 0.76, 0.77, 0.78, 0.79]
+    plt.clf()
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    # new Bezier - Feature Bagging
+    # bezier_baseline = [0.80, 0.88, 0.92, 0.94, 0.95, 0.96, 0.97, 0.98, 0.98, 0.98]
+    # bezier_humanlike = [0.72, 0.78, 0.82, 0.85, 0.86, 0.88, 0.89, 0.90, 0.90, 0.91,]
+    # unsup_ae_cnn = [0.80, 0.87, 0.90, 0.93, 0.94, 0.95, 0.96, 0.96, 0.97, 0.97,]
+    # unsup_ae_rnn = [0.98, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
+    # sup_ae_cnn = [0.59, 0.61, 0.63, 0.64, 0.66, 0.66, 0.67, 0.68, 0.69, 0.69]
+    # sup_ae_rnn = [0.62, 0.66, 0.69, 0.71, 0.73, 0.75, 0.76, 0.77, 0.78, 0.79]
+
+    # new Bezier - PCA
+    bezier_baseline = [0.81, 0.86, 0.90, 0.91, 0.93, 0.94, 0.94, 0.95, 0.95, 0.96,]
+    bezier_humanlike = [0.61, 0.65, 0.68, 0.70, 0.71, 0.73, 0.73, 0.74, 0.75, 0.75,]
+    unsup_ae_cnn = [0.75, 0.80, 0.82, 0.84, 0.85, 0.86, 0.87, 0.87, 0.88, 0.88,]
+    unsup_ae_rnn = [0.86, 0.92, 0.95, 0.97, 0.97, 0.98, 0.98, 0.99, 0.99, 0.99,]
+    sup_ae_cnn = [0.62, 0.64, 0.65, 0.65, 0.66, 0.66, 0.67, 0.67, 0.67, 0.67,]
+    sup_ae_rnn = [0.63, 0.64, 0.65, 0.66, 0.67, 0.67, 0.67, 0.68, 0.68, 0.68,]
+
+    # new Bezier - OCSVM
+    # bezier_baseline = [0.82, 0.87, 0.89, 0.91, 0.93, 0.93, 0.94, 0.95, 0.95, 0.96]
+    # bezier_humanlike = [0.60, 0.64, 0.67, 0.69, 0.70, 0.72, 0.73, 0.73, 0.74, 0.74]
+    # unsup_ae_cnn = [0.75, 0.78, 0.80, 0.81, 0.82, 0.83, 0.83, 0.84, 0.84, 0.85]
+    # unsup_ae_rnn = [0.89, 0.93, 0.96, 0.97, 0.98, 0.98, 0.99, 0.99, 0.99, 0.99]
+    # sup_ae_cnn = [0.65, 0.66, 0.67, 0.67, 0.68, 0.68, 0.69, 0.69, 0.69, 0.69]
+    # sup_ae_rnn = [0.68, 0.68, 0.69, 0.70, 0.70, 0.71, 0.71, 0.72, 0.72, 0.72]
+
+    # new Bezier - LOF
+    # bezier_baseline = [0.80, 0.88, 0.92, 0.95, 0.96, 0.97, 0.98, 0.98, 0.98, 0.99]
+    # bezier_humanlike = [0.71, 0.78, 0.82, 0.85, 0.87, 0.88, 0.90, 0.90, 0.91, 0.92]
+    # unsup_ae_cnn = [0.78, 0.86, 0.90, 0.92, 0.94, 0.95, 0.96, 0.97, 0.97, 0.98]
+    # unsup_ae_rnn = [0.97, 0.99, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
+    # sup_ae_cnn = [0.57, 0.61, 0.63, 0.65, 0.67, 0.68, 0.70, 0.71, 0.72, 0.73]
+    # sup_ae_rnn = [0.60, 0.64, 0.67, 0.69, 0.71, 0.72, 0.73, 0.74, 0.75, 0.76]
+
 
     linestyles = [
         (0, (1, 10)),  # loosly dotted
@@ -336,26 +366,59 @@ def plot_multiple_auc():
         "CNN-AE our approach",
         "RNN-AE our approach",
     ]
-    plt.plot(bezier_baseline, color=colors[0], linestyle=linestyles[0])
-    plt.plot(bezier_humanlike, color=colors[1], linestyle=linestyles[1])
-    plt.plot(unsup_ae_cnn, color=colors[2], linestyle=linestyles[2])
-    plt.plot(unsup_ae_rnn, color=colors[3], linestyle=linestyles[3])
-    plt.plot(sup_ae_cnn, color=colors[4], linestyle=linestyles[4])
-    plt.plot(sup_ae_rnn, color=colors[5], linestyle=linestyles[5])
+    plt.plot(x, bezier_baseline, color=colors[0], linestyle=linestyles[0])
+    plt.plot(x, bezier_humanlike, color=colors[1], linestyle=linestyles[1])
+    plt.plot(x, unsup_ae_cnn, color=colors[2], linestyle=linestyles[2])
+    plt.plot(x, unsup_ae_rnn, color=colors[3], linestyle=linestyles[3])
+    plt.plot(x, sup_ae_cnn, color=colors[4], linestyle=linestyles[4])
+    plt.plot(x, sup_ae_rnn, color=colors[5], linestyle=linestyles[5])
     plt.xlabel("Number of aggregated mouse trajectories")
     plt.ylabel("AUC")
+   
+    xlabels = [i for i in range(1, 11)]
+    plt.xticks(x, xlabels)
     plt.legend(labels, loc="best")
     plt.savefig("output_png/auc_lineplot.png")
 
 
 # Access - 2021. augusztus
 def plot_multiple_eer():
-    bezier_baseline =  [0.14, 0.08, 0.06, 0.05, 0.04, 0.03, 0.03, 0.02, 0.02, 0.02]
-    bezier_humanlike = [0.16, 0.11, 0.09, 0.08, 0.07, 0.06, 0.05, 0.05, 0.05, 0.04]
-    unsup_ae_cnn = [0.28, 0.21, 0.17, 0.15, 0.13, 0.11, 0.10, 0.09, 0.08, 0.08]
-    unsup_ae_rnn = [0.06, 0.03, 0.01, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00]
-    sup_ae_cnn = [0.45, 0.44, 0.42, 0.40, 0.39, 0.38, 0.37, 0.37, 0.36, 0.36]
-    sup_ae_rnn = [0.42, 0.40, 0.37, 0.35, 0.34, 0.32, 0.31, 0.30, 0.29, 0.28]
+    plt.clf()
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    # new Bezier - FeatureBagging
+    # bezier_baseline =  [0.28, 0.20, 0.16, 0.13, 0.11, 0.09, 0.08, 0.08, 0.07, 0.06]
+    # bezier_humanlike = [0.34, 0.28, 0.25, 0.23, 0.22, 0.20, 0.19, 0.18, 0.17, 0.17]
+    # unsup_ae_cnn = [0.28, 0.21, 0.17, 0.15, 0.13, 0.11, 0.10, 0.09, 0.08, 0.08]
+    # unsup_ae_rnn = [0.06, 0.03, 0.01, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00]
+    # sup_ae_cnn = [0.45, 0.44, 0.42, 0.40, 0.39, 0.38, 0.37, 0.37, 0.36, 0.36]
+    # sup_ae_rnn = [0.42, 0.40, 0.37, 0.35, 0.34, 0.32, 0.31, 0.30, 0.29, 0.28]
+
+    # new Bezier - PCA
+    bezier_baseline = [0.31, 0.24, 0.19, 0.17, 0.15, 0.14, 0.13, 0.12, 0.11, 0.11]
+    bezier_humanlike = [0.43, 0.39, 0.37, 0.35, 0.34, 0.33, 0.33, 0.32, 0.32, 0.31]
+    unsup_ae_cnn = [0.35, 0.28, 0.25, 0.23, 0.22, 0.21, 0.21, 0.20, 0.19, 0.19,]
+    unsup_ae_rnn = [0.29, 0.17, 0.12, 0.10, 0.08, 0.07, 0.06, 0.05, 0.05, 0.04,]
+    sup_ae_cnn = [0.40, 0.39, 0.39, 0.39, 0.38, 0.37, 0.37, 0.37, 0.37, 0.37,]
+    sup_ae_rnn = [0.41, 0.40, 0.39, 0.39, 0.38, 0.38, 0.37, 0.37, 0.37, 0.37,]
+
+    # new Bezier - OCSVM
+    # bezier_baseline =  [0.26, 0.25, 0.21, 0.18, 0.16, 0.15, 0.13, 0.13, 0.12, 0.12]
+    # bezier_humanlike = [0.43, 0.39, 0.37, 0.36, 0.35, 0.34, 0.33, 0.32, 0.32, 0.31]
+    # unsup_ae_cnn = [0.31, 0.30, 0.29, 0.27, 0.26, 0.25, 0.24, 0.23, 0.23, 0.23,]
+    # unsup_ae_rnn = [0.24, 0.18, 0.12, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.04]
+    # sup_ae_cnn = [0.38, 0.38, 0.38, 0.37, 0.37, 0.36, 0.36, 0.36, 0.36, 0.35,]
+    # sup_ae_rnn = [0.37, 0.37, 0.37, 0.36, 0.36, 0.35, 0.35, 0.34, 0.34, 0.34]
+
+
+    # new Bezier - LOF
+    # bezier_baseline = [0.28, 0.19, 0.15, 0.12, 0.10, 0.09, 0.08, 0.07, 0.06, 0.05,]
+    # bezier_humanlike = [0.35, 0.29, 0.25, 0.22, 0.21, 0.19, 0.18, 0.17, 0.17, 0.16]
+    # unsup_ae_cnn = [0.30, 0.23, 0.18, 0.15, 0.13, 0.11, 0.10, 0.09, 0.08, 0.07,]
+    # unsup_ae_rnn = [0.09, 0.04, 0.02, 0.01, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00,]
+    # sup_ae_cnn = [0.45, 0.43, 0.41, 0.39, 0.38, 0.37, 0.36, 0.35, 0.33, 0.32,]
+    # sup_ae_rnn = [0.44, 0.42, 0.39, 0.37, 0.35, 0.34, 0.33, 0.31, 0.31, 0.30,]
+    
+
     linestyles = [
         (0, (1, 10)),  # loosly dotted
         (0, (3, 1, 1, 1, 1, 1)),  # densely dashdotdotted
@@ -374,14 +437,16 @@ def plot_multiple_eer():
         "RNN-AE our approach",
     ]
 
-    plt.plot(bezier_baseline, color=colors[0], linestyle=linestyles[0])
-    plt.plot(bezier_humanlike, color=colors[1], linestyle=linestyles[1])
-    plt.plot(unsup_ae_cnn, color=colors[2], linestyle=linestyles[2])
-    plt.plot(unsup_ae_rnn, color=colors[3], linestyle=linestyles[3])
-    plt.plot(sup_ae_cnn, color=colors[4], linestyle=linestyles[4])
-    plt.plot(sup_ae_rnn, color=colors[5], linestyle=linestyles[5])
+    plt.plot(x, bezier_baseline, color=colors[0], linestyle=linestyles[0])
+    plt.plot(x, bezier_humanlike, color=colors[1], linestyle=linestyles[1])
+    plt.plot(x, unsup_ae_cnn, color=colors[2], linestyle=linestyles[2])
+    plt.plot(x, unsup_ae_rnn, color=colors[3], linestyle=linestyles[3])
+    plt.plot(x, sup_ae_cnn, color=colors[4], linestyle=linestyles[4])
+    plt.plot(x, sup_ae_rnn, color=colors[5], linestyle=linestyles[5])
     plt.xlabel("Number of aggregated mouse trajectories")
     plt.ylabel("EER")
+    xlabels = [i for i in range(1, 11)]
+    plt.xticks(x, xlabels)
     plt.legend(labels, loc="best")
     plt.savefig("output_png/eer_lineplot.png")
 

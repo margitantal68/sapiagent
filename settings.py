@@ -22,10 +22,12 @@ TRAINING = True
 KEY = "fcn"
 # 'mse' 'custom'
 LOSS = "mse"
+
 SUFFIX = "dx_dy"
 
+
 # 'supervised', 'supervised'
-TRAINING_TYPE = "supervised"
+TRAINING_TYPE = "unsupervised"
 OUTPUT_PNG = OUTPUT_FIGURES + "/" + KEY + "_" + SUFFIX + "_" + LOSS + "_" + TRAINING_TYPE
 
 # model names
@@ -39,4 +41,4 @@ NUM_PLOTS = 900
 
 # anomaly_detection.py
 # number of actions (trajectories) used for decision
-NUM_ACTIONS = 1
+NUM_ACTIONS = 10
