@@ -20,7 +20,7 @@ SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
 
 ### Files
 
-* anomaly_detection.py - anomaly detection evaluations using detectors from PyOD package
+* anomaly_detection_pyod.py - anomaly detection evaluations using detectors from PyOD package
 * autoencoder_models.py - CNN and RNN autoencoder models
 * autoencoder_training.py - training autoencoders conventionally (unsupervised) or using our approach (supervised)
 * create_bezier_actions.py - generate baseline and humanlike bezier actions
@@ -46,6 +46,6 @@ SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
         4. RNN_AE, our approach: TRAINING_TYPE = 'supervised', KEY ='bidirectional' 
     2. Train the autoencoder: **python autoencoder_training.py**
     3. Generate actions (trajectories): **python generate_autoencoder_actions.py**
-6. Evaluate the quality of the generated actions: **python anomaly_detection.py**
+6. Evaluate the quality of the generated actions: **python anomaly_detection_pyod.py**
 
 
