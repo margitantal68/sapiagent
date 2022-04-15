@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import numpy as np
-from math import floor
 from typing import List
 
 OUTPUT_DIR = 'equidistant_actions'
@@ -28,14 +27,25 @@ def create_actions(SESSION, dt=False):
         x2 = stopx[i]
         y2 = stopy[i]
         n = min(length[i], 128)
-        dx = floor((x2 - x1) / n)
-        dy = floor((y2 - y1) / n)
+        dx = (x2 - x1) / n
+        dy = (y2 - y1) / n
         # dxdydt
         if dt:
             dt = (int)(time[i] / n)
      
-        dx_list: List[int] = [dx] * n
-        dy_list: List[int] = [dy] * n
+        # x, y coordinates - floats
+        x = []
+        y = []
+        for i in range(0, n + 1):
+            x.append(x1 + i * dx)
+            y.append(y1 + i * dy)
+        # x, y coordinates - integers
+        x_int = [int(a) for a in x]
+        y_int = [int(a) for a in y]
+
+        dx_list = np.diff(x_int).tolist()
+        dy_list = np.diff(y_int).tolist()
+
         # dxdydt
         if dt:
             dt_list: List[int] = [dt] * n
