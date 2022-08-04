@@ -34,6 +34,10 @@ SapiAgent: A Bot Based on DeepLearning to Generate Human-like MouseTrajectories
 
 ### Steps
 
+We used [ML workspace](https://github.com/ml-tooling/ml-workspace) which is a web-based IDE for machine learning and 
+data science (preloaded with popular data science libraries). 
+Only the [pyclick](https://pypi.org/project/pyclick/) package was added to this workspace.
+
 1. Download and unzip the SapiMouse dataset into **sapimouse** folder
 2. Segment SapiMouse dataset into actions: **python create_sapimouse_actions.py**
 3. Create Bezier **baseline** and **humanlike** datasets using the endpoints from SapMouse S1 (1 min session):  **python create_bezier_actions.py**

@@ -97,7 +97,11 @@ def plot_ROC_single(ee_file, title="ROC curve"):
 def plot_ROC_filelist(
     filelist, labels, title="ROC curve", outputfilename="output_png/roc.png"
 ):
-    set_style()
+    # set_style()
+    # font = {'family': 'normal', 'weight': 'bold', 'size': 12}
+    font = {'family': 'normal', 'size': 16}
+    plt.rc('font', **font)
+
     plt.clf()
     linestyles = [
         (0, (1, 10)),  # loosly dotted
@@ -173,7 +177,13 @@ def plot_curves_dx_dy_dt(df_original, df_generated, bezier=False):
         # original
         dx1 = X1[i, 0:input_size]
         dy1 = X1[i, input_size:2 * input_size]
-        dt1 = X1[i, 2 * input_size:3 * input_size]
+        dt1 = X1[i, 2 * input_size:3 * input_size]  # new Bezier - PCA
+    # bezier_baseline = [0.81, 0.86, 0.90, 0.91, 0.93, 0.94, 0.94, 0.95, 0.95, 0.96,]
+    # bezier_humanlike = [0.61, 0.65, 0.68, 0.70, 0.71, 0.73, 0.73, 0.74, 0.75, 0.75,]
+    # unsup_ae_cnn = [0.75, 0.80, 0.82, 0.84, 0.85, 0.86, 0.87, 0.87, 0.88, 0.88,]
+    # unsup_ae_rnn = [0.86, 0.92, 0.95, 0.97, 0.97, 0.98, 0.98, 0.99, 0.99, 0.99,]
+    # sup_ae_cnn = [0.62, 0.64, 0.65, 0.65, 0.66, 0.66, 0.67, 0.67, 0.67, 0.67,]
+    # sup_ae_rnn = [0.63, 0.64, 0.65, 0.66, 0.67, 0.67, 0.67, 0.68, 0.68, 0.68,]
         # generated
         dx2 = X2[i, 0:input_size]
         dy2 = X2[i, input_size:2 * input_size]
@@ -314,22 +324,6 @@ def plot_multiple_auc():
     plt.clf()
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    # new Bezier - Feature Bagging
-    # bezier_baseline = [0.80, 0.88, 0.92, 0.94, 0.95, 0.96, 0.97, 0.98, 0.98, 0.98]
-    # bezier_humanlike = [0.72, 0.78, 0.82, 0.85, 0.86, 0.88, 0.89, 0.90, 0.90, 0.91,]
-    # unsup_ae_cnn = [0.80, 0.87, 0.90, 0.93, 0.94, 0.95, 0.96, 0.96, 0.97, 0.97,]
-    # unsup_ae_rnn = [0.98, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
-    # sup_ae_cnn = [0.59, 0.61, 0.63, 0.64, 0.66, 0.66, 0.67, 0.68, 0.69, 0.69]
-    # sup_ae_rnn = [0.62, 0.66, 0.69, 0.71, 0.73, 0.75, 0.76, 0.77, 0.78, 0.79]
-
-    # new Bezier - PCA
-    bezier_baseline = [0.81, 0.86, 0.90, 0.91, 0.93, 0.94, 0.94, 0.95, 0.95, 0.96,]
-    bezier_humanlike = [0.61, 0.65, 0.68, 0.70, 0.71, 0.73, 0.73, 0.74, 0.75, 0.75,]
-    unsup_ae_cnn = [0.75, 0.80, 0.82, 0.84, 0.85, 0.86, 0.87, 0.87, 0.88, 0.88,]
-    unsup_ae_rnn = [0.86, 0.92, 0.95, 0.97, 0.97, 0.98, 0.98, 0.99, 0.99, 0.99,]
-    sup_ae_cnn = [0.62, 0.64, 0.65, 0.65, 0.66, 0.66, 0.67, 0.67, 0.67, 0.67,]
-    sup_ae_rnn = [0.63, 0.64, 0.65, 0.66, 0.67, 0.67, 0.67, 0.68, 0.68, 0.68,]
-
     # new Bezier - OCSVM
     # bezier_baseline = [0.82, 0.87, 0.89, 0.91, 0.93, 0.93, 0.94, 0.95, 0.95, 0.96]
     # bezier_humanlike = [0.60, 0.64, 0.67, 0.69, 0.70, 0.72, 0.73, 0.73, 0.74, 0.74]
@@ -346,6 +340,21 @@ def plot_multiple_auc():
     # sup_ae_cnn = [0.57, 0.61, 0.63, 0.65, 0.67, 0.68, 0.70, 0.71, 0.72, 0.73]
     # sup_ae_rnn = [0.60, 0.64, 0.67, 0.69, 0.71, 0.72, 0.73, 0.74, 0.75, 0.76]
 
+    # new Bezier - Feature Bagging
+    bezier_baseline = [0.80, 0.88, 0.92, 0.94, 0.95, 0.96, 0.97, 0.98, 0.98, 0.98]
+    bezier_humanlike = [0.72, 0.78, 0.82, 0.85, 0.86, 0.88, 0.89, 0.90, 0.90, 0.91,]
+    unsup_ae_cnn = [0.80, 0.87, 0.90, 0.93, 0.94, 0.95, 0.96, 0.96, 0.97, 0.97,]
+    unsup_ae_rnn = [0.98, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00]
+    sup_ae_cnn = [0.59, 0.61, 0.63, 0.64, 0.66, 0.66, 0.67, 0.68, 0.69, 0.69]
+    sup_ae_rnn = [0.62, 0.66, 0.69, 0.71, 0.73, 0.75, 0.76, 0.77, 0.78, 0.79]
+
+    # new Bezier - PCA
+    # bezier_baseline = [0.81, 0.86, 0.90, 0.91, 0.93, 0.94, 0.94, 0.95, 0.95, 0.96,]
+    # bezier_humanlike = [0.61, 0.65, 0.68, 0.70, 0.71, 0.73, 0.73, 0.74, 0.75, 0.75,]
+    # unsup_ae_cnn = [0.75, 0.80, 0.82, 0.84, 0.85, 0.86, 0.87, 0.87, 0.88, 0.88,]
+    # unsup_ae_rnn = [0.86, 0.92, 0.95, 0.97, 0.97, 0.98, 0.98, 0.99, 0.99, 0.99,]
+    # sup_ae_cnn = [0.62, 0.64, 0.65, 0.65, 0.66, 0.66, 0.67, 0.67, 0.67, 0.67,]
+    # sup_ae_rnn = [0.63, 0.64, 0.65, 0.66, 0.67, 0.67, 0.67, 0.68, 0.68, 0.68,]
 
     linestyles = [
         (0, (1, 10)),  # loosly dotted
@@ -377,7 +386,11 @@ def plot_multiple_auc():
    
     xlabels = [i for i in range(1, 11)]
     plt.xticks(x, xlabels)
-    plt.legend(labels, loc="best")
+
+    ylabels = np.arange(0.4, 1.01, 0.1)
+    plt.yticks(ylabels)
+
+    plt.legend(labels, loc="lower right")
     plt.savefig("output_png/auc_lineplot.png")
 
 
@@ -385,22 +398,7 @@ def plot_multiple_auc():
 def plot_multiple_eer():
     plt.clf()
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    # new Bezier - FeatureBagging
-    # bezier_baseline =  [0.28, 0.20, 0.16, 0.13, 0.11, 0.09, 0.08, 0.08, 0.07, 0.06]
-    # bezier_humanlike = [0.34, 0.28, 0.25, 0.23, 0.22, 0.20, 0.19, 0.18, 0.17, 0.17]
-    # unsup_ae_cnn = [0.28, 0.21, 0.17, 0.15, 0.13, 0.11, 0.10, 0.09, 0.08, 0.08]
-    # unsup_ae_rnn = [0.06, 0.03, 0.01, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00]
-    # sup_ae_cnn = [0.45, 0.44, 0.42, 0.40, 0.39, 0.38, 0.37, 0.37, 0.36, 0.36]
-    # sup_ae_rnn = [0.42, 0.40, 0.37, 0.35, 0.34, 0.32, 0.31, 0.30, 0.29, 0.28]
-
-    # new Bezier - PCA
-    bezier_baseline = [0.31, 0.24, 0.19, 0.17, 0.15, 0.14, 0.13, 0.12, 0.11, 0.11]
-    bezier_humanlike = [0.43, 0.39, 0.37, 0.35, 0.34, 0.33, 0.33, 0.32, 0.32, 0.31]
-    unsup_ae_cnn = [0.35, 0.28, 0.25, 0.23, 0.22, 0.21, 0.21, 0.20, 0.19, 0.19,]
-    unsup_ae_rnn = [0.29, 0.17, 0.12, 0.10, 0.08, 0.07, 0.06, 0.05, 0.05, 0.04,]
-    sup_ae_cnn = [0.40, 0.39, 0.39, 0.39, 0.38, 0.37, 0.37, 0.37, 0.37, 0.37,]
-    sup_ae_rnn = [0.41, 0.40, 0.39, 0.39, 0.38, 0.38, 0.37, 0.37, 0.37, 0.37,]
-
+  
     # new Bezier - OCSVM
     # bezier_baseline =  [0.26, 0.25, 0.21, 0.18, 0.16, 0.15, 0.13, 0.13, 0.12, 0.12]
     # bezier_humanlike = [0.43, 0.39, 0.37, 0.36, 0.35, 0.34, 0.33, 0.32, 0.32, 0.31]
@@ -418,6 +416,21 @@ def plot_multiple_eer():
     # sup_ae_cnn = [0.45, 0.43, 0.41, 0.39, 0.38, 0.37, 0.36, 0.35, 0.33, 0.32,]
     # sup_ae_rnn = [0.44, 0.42, 0.39, 0.37, 0.35, 0.34, 0.33, 0.31, 0.31, 0.30,]
     
+    # new Bezier - FeatureBagging
+    bezier_baseline =  [0.28, 0.20, 0.16, 0.13, 0.11, 0.09, 0.08, 0.08, 0.07, 0.06]
+    bezier_humanlike = [0.34, 0.28, 0.25, 0.23, 0.22, 0.20, 0.19, 0.18, 0.17, 0.17]
+    unsup_ae_cnn = [0.28, 0.21, 0.17, 0.15, 0.13, 0.11, 0.10, 0.09, 0.08, 0.08]
+    unsup_ae_rnn = [0.06, 0.03, 0.01, 0.01, 0.01, 0.00, 0.00, 0.00, 0.00, 0.00]
+    sup_ae_cnn = [0.45, 0.44, 0.42, 0.40, 0.39, 0.38, 0.37, 0.37, 0.36, 0.36]
+    sup_ae_rnn = [0.42, 0.40, 0.37, 0.35, 0.34, 0.32, 0.31, 0.30, 0.29, 0.28]
+
+    # new Bezier - PCA
+    # bezier_baseline = [0.31, 0.24, 0.19, 0.17, 0.15, 0.14, 0.13, 0.12, 0.11, 0.11]
+    # bezier_humanlike = [0.43, 0.39, 0.37, 0.35, 0.34, 0.33, 0.33, 0.32, 0.32, 0.31]
+    # unsup_ae_cnn = [0.35, 0.28, 0.25, 0.23, 0.22, 0.21, 0.21, 0.20, 0.19, 0.19,]
+    # unsup_ae_rnn = [0.29, 0.17, 0.12, 0.10, 0.08, 0.07, 0.06, 0.05, 0.05, 0.04,]
+    # sup_ae_cnn = [0.40, 0.39, 0.39, 0.39, 0.38, 0.37, 0.37, 0.37, 0.37, 0.37,]
+    # sup_ae_rnn = [0.41, 0.40, 0.39, 0.39, 0.38, 0.38, 0.37, 0.37, 0.37, 0.37,]
 
     linestyles = [
         (0, (1, 10)),  # loosly dotted
@@ -445,9 +458,14 @@ def plot_multiple_eer():
     plt.plot(x, sup_ae_rnn, color=colors[5], linestyle=linestyles[5])
     plt.xlabel("Number of aggregated mouse trajectories")
     plt.ylabel("EER")
+    
     xlabels = [i for i in range(1, 11)]
     plt.xticks(x, xlabels)
-    plt.legend(labels, loc="best")
+    
+    ylabels = np.arange(0.0, 0.75, 0.1)
+    plt.yticks(ylabels)
+
+    plt.legend(labels, loc="upper right")
     plt.savefig("output_png/eer_lineplot.png")
 
 

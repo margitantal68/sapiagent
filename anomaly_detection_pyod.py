@@ -46,7 +46,15 @@ def main():
         print('Directory %s already exist' % ROC_DIR)
     else:
         print('Successfuly created the directory %s' % ROC_DIR)
-
+    # BEGIN
+    directory = "output_scores"
+    path = os.path.join(".", directory)
+    mode = 0o666
+    try:
+        os.mkdir(path, mode)
+    except:
+        print(directory + " already exists")
+    # END 
     synthetic_filenames = [
         "bezier_actions/bezier_baseline_actions.csv",
         "bezier_actions/bezier_humanlike_actions.csv",
@@ -90,22 +98,22 @@ def main():
         
     models = []
     # linear models
-    models.append(("PCA", PCA(random_state=stt.RANDOM_STATE)))
-    models.append(("MCD", MCD()))
-    models.append(("OCSVM", OCSVM()))
+    # models.append(("PCA", PCA(random_state=stt.RANDOM_STATE)))
+    # models.append(("MCD", MCD()))
+    # models.append(("OCSVM", OCSVM()))
     # proximity-based
-    models.append(("LOF", LOF()))
-    models.append(("CBLOF", CBLOF()))    
-    models.append(("HBOS", HBOS()))
-    models.append(("KNN", KNN()))
+    # models.append(("LOF", LOF()))
+    # models.append(("CBLOF", CBLOF()))    
+    # models.append(("HBOS", HBOS()))
+    # models.append(("KNN", KNN()))
     # probabilistic
-    models.append(("ABOD", ABOD()))
-    models.append(("COPOD", COPOD()))
+    # models.append(("ABOD", ABOD()))
+    # models.append(("COPOD", COPOD()))
     # ensembles
-    models.append(("IForest", IForest(random_state=stt.RANDOM_STATE)))  
+    # models.append(("IForest", IForest(random_state=stt.RANDOM_STATE)))  
     models.append(("FeatureBagging", FeatureBagging(random_state=stt.RANDOM_STATE))) 
-    detector_list = [LOF(), LOF()]
-    models.append(("LSCP", LSCP(detector_list, random_state=stt.RANDOM_STATE)))  
+    # detector_list = [LOF(), LOF()]
+    # models.append(("LSCP", LSCP(detector_list, random_state=stt.RANDOM_STATE)))  
     # neural networks
     # models.append(("SO_GAAL", SO_GAAL()))
     # models.append(("MO_GAAL", MO_GAAL()))

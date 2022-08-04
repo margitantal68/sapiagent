@@ -88,13 +88,13 @@ def action2rawfeatures(action):
     dy = dy.values.tolist()
     dt = dt.values.tolist()
     if len(dx) < MAX_LEN:
-        # shorter actions will be completed by zeros
+        # shorter actions: zero padding
         for i in range(MAX_LEN - len(dx)):
             dx.append(0)
             dy.append(0)
             dt.append(0)
     else:
-        # longer actions will be truncated
+        # longer actions: truncated
         dx = dx[0:MAX_LEN]   
         dy = dy[0:MAX_LEN]   
         dt = dt[0:MAX_LEN]   
@@ -122,7 +122,16 @@ def process_files(session_type):
 
 
 if __name__ == "__main__":
-    feature_type = FeatureType.DX_DY_DT
+    # BEGIN
+    directory = "sapimouse_actions"
+    path = os.path.join(".", directory)
+    mode = 0o666
+    try:
+        os.mkdir(path, mode)
+    except:
+        print(directory + " already exists")
+    feature_type = FeatureType.DX_DY
+    # END 
     for session_type in SessionType:
         f_out = open('sapimouse_actions/actions_' + session_type.value + '_' + feature_type.value + '.csv', 'w')
         if STATISTICS:
